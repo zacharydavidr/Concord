@@ -188,8 +188,8 @@ SQL;
             ->getLastName());
 
         // Send email with the validator in it
-        $link = "http://webdev.cse.msu.edu"  . $this->site->getRoot() .
-            '/confirm-account.php?v=' . $validator;
+        $link = "http://cse.msu.edu"  . $this->site->getRoot() .
+            '/account/confirm/' . $validator;
 
         $from = $this->site->getEmail();
         $name = $user->getFirstName();
@@ -197,9 +197,9 @@ SQL;
         $subject = "Confirm your email";
         $message = <<<MSG
 <html>
-<p>Greetings, $name,</p>
+<p>Hey $name,</p>
 
-<p>Welcome to The Cottage Connection. In order to complete your registration,
+<p>Welcome to Concord! In order to complete your registration,
 please verify your email address by visiting the following link:</p>
 
 <p><a href="$link">$link</a></p>
@@ -230,7 +230,7 @@ SQL;
         $statement = $this->pdo()->prepare($sql);
 
         $statement->execute(array(
-            $email, $firstName, $lastName, $salt, $hash, User::USER));
+            $email, $firstName, $lastName, $salt, $hash, User::OWNER));
     }
 
 }

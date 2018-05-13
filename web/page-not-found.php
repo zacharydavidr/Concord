@@ -2,8 +2,8 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-
 $view = new Concord\views\PageNotFoundView();
+
 ?>
 
 <!DOCTYPE html>

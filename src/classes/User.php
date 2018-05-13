@@ -5,7 +5,7 @@ namespace Concord\classes;
 class User
 {
     const ADMIN = "A";
-    const OWNER = "U";
+    const OWNER = "O";
     const GUEST = "G";
 
     const SESSION_NAME = 'user';

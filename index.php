@@ -1,27 +1,55 @@
 <?php
 
-ini_set("display_errors", true);
-error_reporting( E_ALL );
+//ini_set("display_errors", true);
+//error_reporting( E_ALL );
 
 
 require __DIR__ . '/vendor/autoload.php';
 require 'src/site.inc.php';
 
 $path_info = parse_path();
+$controller = $path_info['call_parts'][0];
+$action = $path_info['call_parts'][1];
 
-switch($path_info['call_parts'][0]) {
+switch($controller) {
     case "" :
         require "web/login.php";
         break;
     case "login" :
 
-        if($path_info['call_parts'][1] == "process"){
+        if($action == "process"){
             $loginController = new Concord\controllers\LoginController($site,$_SESSION,$_POST);
             header("location: " . $loginController->getRedirect());
         }
         break;
-    case "Create-Account" :
-        require "web/create-account.php";
+    case "account" :
+        if($action == "create"){
+            require "src/controllers/CreateAccountController.php";
+            $newAccountController = new Concord\controllers\NewAccountController($site,$_POST);
+            header("location: " . $newAccountController->getRedirect());
+            break;
+        } elseif($action == "validate"){
+            require "src/controllers/ConfirmAccountController.php";
+            $confirmAccountController = new Concord\controllers\ConfirmAccountController($site,$_POST);
+            header("location: " . $confirmAccountController->getRedirect());
+            break;
+        } elseif($action == "error"){
+            $_GET['v'] = $path_info['call_parts'][2];
+            require "web/confirm-account.php";
+            break;
+        } elseif($action == "check-email"){
+            $_GET['sign-up-email'] = $path_info['call_parts'][2];
+            require "web/check-email.php";
+            break;
+        }
+        elseif($action == "confirm"){
+            $_GET['v'] = $path_info['call_parts'][2];
+            require "web/confirm-account.php";
+            break;
+        } elseif ($action == "register"){
+            require "web/create-account.php";
+            break;
+        }
         break;
     default:
         require "web/page-not-found.php";
