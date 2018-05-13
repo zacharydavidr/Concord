@@ -1,9 +1,9 @@
 <?php
 
-require_once("/user/rayzacha/web/Concord/config/global.php");
-require_once(BASE_PATH . "/src/views/CreateAccountView.php");
+require __DIR__ . '/../vendor/autoload.php';
 
-$view = new Concord\CreateAccountView();
+$view = new Concord\views\CreateAccountView();
+
 ?>
 
 <!DOCTYPE html>

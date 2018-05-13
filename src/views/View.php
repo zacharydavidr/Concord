@@ -1,13 +1,9 @@
 <?php
 
-namespace Concord;
+namespace Concord\views;
 
-/**
- * This class represents the base view all other views inherit from
- */
 class View
 {
-
     /**
      * The base head for all views
      * @return string HTML formatted header
@@ -41,7 +37,6 @@ class View
 
 HTML;
     }
-
 
     /**
      * The base header for all views

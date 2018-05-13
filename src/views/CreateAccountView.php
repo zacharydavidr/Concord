@@ -1,13 +1,7 @@
 <?php
 
-namespace Concord;
+namespace Concord\views;
 
-require_once('View.php');
-
-/**
- * Class CreateAccountView
- * @package Concord\View
- */
 class CreateAccountView extends View
 {
     public function __construct(){

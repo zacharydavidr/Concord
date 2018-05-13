@@ -1,10 +1,10 @@
 <?php
 
-namespace Concord;
+namespace Concord\controllers;
 
-require_once("/user/rayzacha/web/Concord/config/global.php");
-require_once(BASE_PATH . "/src/classes/Users.php");
-
+use Concord\classes\Site;
+use Concord\classes\Users;
+use Concord\classes\User;
 
 /**
  * Class LoginController

@@ -2,9 +2,10 @@
 
 namespace Concord;
 
-//require __DIR__ . "/../vendor/autoload.php";
-require "/user/rayzacha/web/Concord/src/classes/Site.php";
-require "/user/rayzacha/web/Concord/src/classes/User.php";
+use Concord\classes\Site;
+use Concord\classes\User;
+
+require __DIR__ . "/../vendor/autoload.php";
 
 $site = new Site();
 

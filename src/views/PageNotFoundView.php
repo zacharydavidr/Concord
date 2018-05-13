@@ -1,18 +1,13 @@
 <?php
 
-namespace Concord;
+namespace Concord\views;
 
-require_once('View.php');
-
-/**
- * Class LoginView
- * @package Concord\View
- */
 class PageNotFoundView extends View
 {
     public function __construct(){
     }
-    public function errorMessage(){
+
+    public function body(){
         return <<<HTML
     <h1>Debug information</h1>
 HTML;

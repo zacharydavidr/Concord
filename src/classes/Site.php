@@ -1,8 +1,6 @@
 <?php
 
-
-namespace Concord;
-
+namespace Concord\classes;
 
 class Site
 {

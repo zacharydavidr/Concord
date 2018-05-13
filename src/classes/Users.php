@@ -1,16 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: zachary
- * Date: 5/13/18
- * Time: 12:33 AM
- */
 
-namespace Concord;
-
-require_once("/user/rayzacha/web/Concord/config/global.php");
-require_once(BASE_PATH . "/src/classes/Table.php");
-
+namespace Concord\classes;
 
 class Users extends Table
 {

@@ -1,11 +1,9 @@
 <?php
 
-require_once("/user/rayzacha/web/Concord/config/global.php");
-require_once(BASE_PATH . "/src/views/PageNotFoundView.php");
+require __DIR__ . '/../vendor/autoload.php';
 
 
-
-$view = new Concord\PageNotFoundView();
+$view = new Concord\views\PageNotFoundView();
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +14,7 @@ $view = new Concord\PageNotFoundView();
 
 <body>
 <?php echo $view->header(); ?>
-<?php echo $view->errorMessage(); ?>
+<?php echo $view->body(); ?>
 <pre>
     <p>GET</p>
     <?php print_r($_GET); ?>

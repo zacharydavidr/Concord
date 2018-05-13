@@ -1,13 +1,11 @@
 <?php
 
-require_once("/user/rayzacha/web/Concord/config/global.php");
-require_once(BASE_PATH . "/src/views/LoginView.php");
-require "src/site.inc.php";
+ini_set("display_errors", true);
+error_reporting( E_ALL );
 
 
-include("/user/rayzacha/web/Concord/config/global.php");
-
-
+require __DIR__ . '/vendor/autoload.php';
+require 'src/site.inc.php';
 
 $path_info = parse_path();
 
@@ -16,10 +14,9 @@ switch($path_info['call_parts'][0]) {
         require "web/login.php";
         break;
     case "login" :
-        require("src/controllers/LoginController.php");
 
         if($path_info['call_parts'][1] == "process"){
-            $loginController = new Concord\LoginController($site, $_SESSION, $_POST);
+            $loginController = new Concord\controllers\LoginController($site,$_SESSION,$_POST);
             header("location: " . $loginController->getRedirect());
         }
         break;
@@ -30,6 +27,7 @@ switch($path_info['call_parts'][0]) {
         require "web/page-not-found.php";
         break;
 }
+
 
 
 function parse_path() {

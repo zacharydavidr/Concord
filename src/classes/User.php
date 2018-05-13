@@ -1,6 +1,6 @@
 <?php
 
-namespace Concord;
+namespace Concord\classes;
 
 class User
 {

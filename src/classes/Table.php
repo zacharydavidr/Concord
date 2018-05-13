@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: zachary
- * Date: 5/13/18
- * Time: 12:34 AM
- */
 
-namespace Concord;
-
+namespace Concord\classes;
 
 class Table {
     /**
