@@ -1,6 +1,36 @@
 <?php
 
+require_once("/user/rayzacha/web/Concord/config/global.php");
+require_once(BASE_PATH . "/src/views/LoginView.php");
+require "src/site.inc.php";
+
+
 include("/user/rayzacha/web/Concord/config/global.php");
+
+
+
+$path_info = parse_path();
+
+switch($path_info['call_parts'][0]) {
+    case "" :
+        require "web/login.php";
+        break;
+    case "login" :
+        require("src/controllers/LoginController.php");
+
+        if($path_info['call_parts'][1] == "process"){
+            $loginController = new Concord\LoginController($site, $_SESSION, $_POST);
+            header("location: " . $loginController->getRedirect());
+        }
+        break;
+    case "Create-Account" :
+        require "web/create-account.php";
+        break;
+    default:
+        require "web/page-not-found.php";
+        break;
+}
+
 
 function parse_path() {
     $path = array();
@@ -25,11 +55,3 @@ function parse_path() {
     }
     return $path;
 }
-
-
-//switch($path_info['call_parts'][0]) {
-//    case "test": include "test.html";
-//        break;
-//    default:
-//        include BASE_PATH . "web/login.php";
-//}

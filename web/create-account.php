@@ -1,16 +1,15 @@
 <?php
 
 require_once("/user/rayzacha/web/Concord/config/global.php");
-require_once(BASE_PATH . "/src/views/LoginView.php");
+require_once(BASE_PATH . "/src/views/CreateAccountView.php");
 
-$view = new Concord\LoginView();
+$view = new Concord\CreateAccountView();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <?php echo $view->head()?>
-    <link href="/~rayzacha/Concord/stylesheets/login.css" rel="stylesheet">
 </head>
 
 <body>
@@ -18,3 +17,4 @@ $view = new Concord\LoginView();
 <?php echo $view->body(); ?>
 </body>
 </html>
+
