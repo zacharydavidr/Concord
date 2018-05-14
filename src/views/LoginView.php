@@ -23,8 +23,6 @@ class LoginView extends View
         </div>
       </div>
       <button class="btn btn-primary" type="submit">Sign in</button>
-      <p><a href="/~rayzacha/Concord/Forgot-Password/">Forgot Password</a></p>
-      <p><a href="/~rayzacha/Concord/account/register/">Create Account</a></p>
     </form>
 HTML;
 

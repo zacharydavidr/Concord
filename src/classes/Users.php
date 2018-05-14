@@ -188,7 +188,7 @@ SQL;
             ->getLastName());
 
         // Send email with the validator in it
-        $link = "http://cse.msu.edu"  . $this->site->getRoot() .
+        $link = "https://cse.msu.edu"  . $this->site->getRoot() .
             '/account/confirm/' . $validator;
 
         $from = $this->site->getEmail();

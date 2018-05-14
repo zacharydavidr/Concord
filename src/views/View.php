@@ -1,6 +1,20 @@
 <?php
 
+
 namespace Concord\views;
+
+if(false) {
+    ini_set("display_errors", true);
+    error_reporting(E_ALL);
+
+    echo "<pre>";
+    echo "GET " . var_dump($_GET);
+    echo "POST " . var_dump($_POST);
+    echo "</pre>";
+}
+
+require "/user/rayzacha/web/Concord/config/GlobalEnv.php";
+
 
 class View
 {
@@ -54,16 +68,13 @@ HTML;
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Cottage<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/~rayzacha/Concord/cottage/">Cottage<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Trips<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/~rayzacha/Concord/account/">Account<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Account<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/~rayzacha/Concord/logout/">Logout<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>

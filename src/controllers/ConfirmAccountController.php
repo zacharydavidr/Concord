@@ -18,11 +18,10 @@ class ConfirmAccountController
 {
 
     const INVALID_VALIDATOR = 'validator';
-    const INVALID_EMAIL = 'email_invalid';
-    const MISMATCH_EMAIL = 'email_mismatch';
-    const MISMATCH_PASSWORDS = 'password_mismatch';
-    const PASSWORD_LENGTH = 'password_length';
-
+    const INVALID_EMAIL = 'email-invalid';
+    const MISMATCH_EMAIL = 'email-mismatch';
+    const MISMATCH_PASSWORDS = 'password-mismatch';
+    const PASSWORD_LENGTH = 'password-length';
 
 
     /**
@@ -42,7 +41,7 @@ class ConfirmAccountController
         $validator = strip_tags($post['validator']);
         $email = $validators->get($validator);
         if($email === null) {
-            header("location: " .  "$root/confirm-account.php?v=$validator&e=" . self::INVALID_VALIDATOR);
+            header("location: " .  "$root/account/registration-error?validation-code=$validator&reg-error=" . self::INVALID_VALIDATOR);
             exit();
         }
 
@@ -58,7 +57,7 @@ class ConfirmAccountController
 
         if($database_email === null) {
             // User does not exist!
-            header("location: " . "$root/confirm-account.php?v=$validator&e=" . self::INVALID_EMAIL);
+            header("location: " . "$root/account/registration-error?validation-code=$validator&reg-error=" . self::INVALID_EMAIL);
             exit();
         }
 
@@ -70,13 +69,13 @@ class ConfirmAccountController
 
         if($password1 !== $password2) {
             // Passwords do not match
-            header("location: " . "$root/confirm-account.php?v=$validator&e=" . self::MISMATCH_PASSWORDS);
+            header("location: " . "$root/account/registration-error?validation-code=$validator&reg-error=" . self::MISMATCH_PASSWORDS);
             exit();
         }
 
-        if(strlen($password1) < 1) {
+        if(strlen($password1) < 4) {
             // Password too short
-            header("location: " . "$root/confirm-account.php?v=$validator&e=" . self::PASSWORD_LENGTH);
+            header("location: " . "$root/account/registration-error?validation-code=$validator&reg-error=" . self::PASSWORD_LENGTH);
             exit();
         }
 
@@ -92,7 +91,7 @@ class ConfirmAccountController
         //
         $validators->remove($email);
 
-        header("location: " . "$root");
+        header("location: " . "$root" . "/account/registration-success/" );
         exit();
 
 

@@ -1,62 +1,119 @@
 <?php
 
-//ini_set("display_errors", true);
-//error_reporting( E_ALL );
-
-
 require __DIR__ . '/vendor/autoload.php';
 require 'src/site.inc.php';
 
-$path_info = parse_path();
-$controller = $path_info['call_parts'][0];
-$action = $path_info['call_parts'][1];
-
-switch($controller) {
-    case "" :
-        require "web/login.php";
-        break;
-    case "login" :
-
-        if($action == "process"){
-            $loginController = new Concord\controllers\LoginController($site,$_SESSION,$_POST);
-            header("location: " . $loginController->getRedirect());
-        }
-        break;
-    case "account" :
-        if($action == "create"){
-            require "src/controllers/CreateAccountController.php";
-            $newAccountController = new Concord\controllers\NewAccountController($site,$_POST);
-            header("location: " . $newAccountController->getRedirect());
-            break;
-        } elseif($action == "validate"){
-            require "src/controllers/ConfirmAccountController.php";
-            $confirmAccountController = new Concord\controllers\ConfirmAccountController($site,$_POST);
-            header("location: " . $confirmAccountController->getRedirect());
-            break;
-        } elseif($action == "error"){
-            $_GET['v'] = $path_info['call_parts'][2];
-            require "web/confirm-account.php";
-            break;
-        } elseif($action == "check-email"){
-            $_GET['sign-up-email'] = $path_info['call_parts'][2];
-            require "web/check-email.php";
-            break;
-        }
-        elseif($action == "confirm"){
-            $_GET['v'] = $path_info['call_parts'][2];
-            require "web/confirm-account.php";
-            break;
-        } elseif ($action == "register"){
-            require "web/create-account.php";
-            break;
-        }
-        break;
-    default:
-        require "web/page-not-found.php";
-        break;
+//----------MAIN--------------
+if(false) {
+    ini_set("display_errors", true);
+    error_reporting(E_ALL);
 }
 
 
+$urlInfo = parse_path();
+route($site, $urlInfo);
+//-----------------------------
+
+/**
+ * Primary URL mappings
+ * @param \Concord\classes\Site $site
+ * @param array $urlInfo
+ */
+function route(\Concord\classes\Site $site, array $urlInfo){
+    $controller = $urlInfo['call_parts'][0];
+    $action = $urlInfo['call_parts'][1];
+    $param = $urlInfo['call_parts'][2];
+
+    switch($controller) {
+        case "" :
+            root($site, $action, $param);
+            break;
+        case "login" :
+            login($site, $action, $param);
+            break;
+        case "account" :
+            account($site, $action, $param, $urlInfo);
+            break;
+        default:
+            require "web/page-not-found.php";
+            break;
+    }
+}
+
+/**
+ * Mapping for /~rayzacha/Concord/
+ */
+function root($site, $action, $param){
+    require "web/login.php";
+}
+
+/**
+ * Mapping for /~rayzacha/Concord/
+ */
+function login($site, $action, $param){
+    if ($action == "process") {
+
+        $loginController = new Concord\controllers\LoginController($site, $_SESSION, $_POST);
+        header("location: " . $loginController->getRedirect());
+
+    } elseif($action == 'auth-error'){
+
+        require "web/login.php";
+
+    } else {
+
+        require "web/login.php";
+
+    }
+}
+
+/**
+ *  * Mapping for /~rayzacha/Concord/account/*
+ * @param $site
+ * @param $action
+ * @param $param
+ */
+function account($site, $action, $param, $urlInfo){
+    if ($action == "create") {
+
+        require "src/controllers/CreateAccountController.php";
+        $newAccountController = new Concord\controllers\NewAccountController($site, $_POST);
+        header("location: " . $newAccountController->getRedirect());
+
+    } elseif ($action == "validate") {
+
+        require "src/controllers/ConfirmAccountController.php";
+        $confirmAccountController = new Concord\controllers\ConfirmAccountController($site, $_POST);
+        header("location: " . $confirmAccountController->getRedirect());
+
+    } elseif($action == "registration-success"){
+
+        require "web/account-registration-successful.php";
+
+    } elseif ($action == "check-email") {
+
+        $_GET['sign-up-email'] = $param;
+        require "web/check-email.php";
+
+    } elseif ($action == "confirm") {
+
+        $_GET['validation-code'] = $param;
+        require "web/confirm-account.php";
+
+    } elseif ($action == "register") {
+
+        require "web/create-account.php";
+
+    } elseif ($action == "registration-error"){
+
+        require "web/confirm-account.php";
+
+    } else{
+
+        require "web/page-not-found.php";
+
+    }
+}
 
 function parse_path() {
     $path = array();

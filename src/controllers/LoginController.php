@@ -12,6 +12,8 @@ use Concord\classes\User;
  */
 class LoginController
 {
+    const MISMATCH_EMAIL = 'login-mismatch';
+
     public function __construct(Site $site, array &$session, array $post) {
         // Create a Users object to access the table
         $users = new Users($site);
@@ -26,10 +28,9 @@ class LoginController
 
         if($user === null) {
             // Login failed
-            $this->redirect = "$root/error.php";
+            $this->redirect = "$root/login/error?auth-error=" . LoginController::MISMATCH_EMAIL;
         } else {
-            $this->redirect = "$root/successful.php";
-
+            $this->redirect = "$root/success.php";
         }
     }
 
