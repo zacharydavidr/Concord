@@ -6,7 +6,6 @@ $view = new \Concord\views\LoginView();
 
 $authError = $_GET['auth-error'];
 
-echo $authError;
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +23,7 @@ if($authError == \Concord\controllers\LoginController::MISMATCH_EMAIL){
     echo "<p> Incorrect email and or password combination</p>";
 }
 ?>
-<p><a href="/~rayzacha/Concord/Forgot-Password/">Forgot Password</a></p>
+<p><a href="/~rayzacha/Concord/account/forgot-password">Forgot Password</a></p>
 <p><a href="/~rayzacha/Concord/account/register/">Create Account</a></p>
 </body>
 </html>

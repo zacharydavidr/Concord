@@ -34,11 +34,16 @@ function route(\Concord\classes\Site $site, array $urlInfo){
         case "account" :
             account($site, $action, $param, $urlInfo);
             break;
+        case "calendar":
+            calendar($site, $action, $param, $urlInfo);
+            break;
         default:
             require "web/page-not-found.php";
             break;
     }
 }
+
+
 
 /**
  * Mapping for /~rayzacha/Concord/
@@ -114,6 +119,18 @@ function account($site, $action, $param, $urlInfo){
 
     }
 }
+
+/**
+ *  * Mapping for /~rayzacha/Concord/calendar/*
+ * @param $site
+ * @param $action
+ * @param $param
+ */
+function calendar($site, $action, $param, $urlInfo){
+    require "web/calendar.php";
+
+}
+
 
 function parse_path() {
     $path = array();

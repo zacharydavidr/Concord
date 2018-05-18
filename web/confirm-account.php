@@ -16,23 +16,7 @@ $registrationError = $_GET['reg-error']
 </head>
 <body>
 <?php echo $view->header() ?>
-<?php
-    if(is_null($registrationError)){
-        echo "<p> To complete the sign up process please choose a password!</p>";
-    }elseif($registrationError == \Concord\controllers\ConfirmAccountController::INVALID_EMAIL){
-        echo "<p> Couldn't find your validation code, retry link from email. If problems persists
-                  restart account registration process. If you continue to have problems after
-                  contact Zach personally, you've found and or caused a bug. </p>";
-    }elseif($registrationError == \Concord\controllers\ConfirmAccountController::INVALID_VALIDATOR){
-        echo "<p> Couldn't match the email associated with this validation code. If problems persists
-                  restart account registration process. If you continue to have problems after
-                  contact Zach personally, you've found and or caused a bug.</p>";
-    }elseif($registrationError == \Concord\controllers\ConfirmAccountController::MISMATCH_PASSWORDS){
-        echo "<p> Passwords did not match, please try again.</p>";
-    }elseif($registrationError == \Concord\controllers\ConfirmAccountController::PASSWORD_LENGTH){
-        echo "<p> Passwords need to be at least 4 characters long, please try again.</p>";
-    }
-?>
+
 <form action="/~rayzacha/Concord/account/validate" method="post">
     <input type="hidden" name="validator" value="<?php echo $_GET['validation-code']; ?>">
     <div class="form-row">
@@ -49,6 +33,24 @@ $registrationError = $_GET['reg-error']
     </div>
     <button class="btn btn-primary" type="submit">Register</button>
 </form>
+
+<?php
+if(is_null($registrationError)){
+    echo "<p> To complete the sign up process please choose a password!</p>";
+}elseif($registrationError == \Concord\controllers\ConfirmAccountController::INVALID_EMAIL){
+    echo "<p> Couldn't find your validation code, retry link from email. If problems persists
+                  restart account registration process. If you continue to have problems after
+                  contact Zach personally, you've found and or caused a bug. </p>";
+}elseif($registrationError == \Concord\controllers\ConfirmAccountController::INVALID_VALIDATOR){
+    echo "<p> Couldn't match the email associated with this validation code. If problems persists
+                  restart account registration process. If you continue to have problems after
+                  contact Zach personally, you've found and or caused a bug.</p>";
+}elseif($registrationError == \Concord\controllers\ConfirmAccountController::MISMATCH_PASSWORDS){
+    echo "<p> Passwords did not match, please try again.</p>";
+}elseif($registrationError == \Concord\controllers\ConfirmAccountController::PASSWORD_LENGTH){
+    echo "<p> Passwords need to be at least 4 characters long</p>";
+}
+?>
 
 </body>
 </html>
