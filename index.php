@@ -37,6 +37,9 @@ function route(\Concord\classes\Site $site, array $urlInfo){
         case "calendar":
             calendar($site, $action, $param, $urlInfo);
             break;
+        case "trips":
+            trips($site,$action, $param, $urlInfo);
+            break;
         default:
             require "web/page-not-found.php";
             break;
@@ -131,6 +134,23 @@ function calendar($site, $action, $param, $urlInfo){
 
 }
 
+/**
+ *  * Mapping for /~rayzacha/Concord/trips/*
+ * @param $site
+ * @param $action
+ * @param $param
+ */
+function trips($site, $action, $param, $urlInfo){
+    if ($action == "create") {
+
+        require "src/controllers/CreateTripController.php";
+        $createTripController = new Concord\controllers\CreateTripController($site, $_POST);
+        header("location: " . $createTripController->getRedirect());
+
+    } else{
+        require "web/create-trip.php";
+    }
+}
 
 function parse_path() {
     $path = array();

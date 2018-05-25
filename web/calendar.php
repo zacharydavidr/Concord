@@ -22,6 +22,12 @@ $cal = new \Concord\classes\Calendar();
     <div class="row">
 <?php echo $cal->showMonth();?>
     </div>
+
+    <div>
+        <h3 class="text-left" >Who's at the cottage?</h3>
+        <p>Zach: 5/31 to 6/2</p>
+    </div>
+
 </div>
 </body>
 </html>

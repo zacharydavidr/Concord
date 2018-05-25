@@ -3,6 +3,10 @@
 namespace Concord\classes;
 
 class Table {
+
+    protected $site;        ///< The Site object
+    protected $tableName;   ///< The table name to use
+
     /**
      * Constructor
      * @param Site $site The site object
@@ -57,7 +61,4 @@ class Table {
     public function pdo() {
         return $this->site->pdo();
     }
-
-    protected $site;        ///< The Site object
-    protected $tableName;   ///< The table name to use
 }
