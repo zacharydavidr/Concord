@@ -2,9 +2,11 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+
+
 $view = new \Concord\views\CalendarView();
 
-$cal = new \Concord\classes\Calendar();
+$cal = new \Concord\classes\Calendar($site);
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +27,7 @@ $cal = new \Concord\classes\Calendar();
 
     <div>
         <h3 class="text-left" >Who's at the cottage?</h3>
-        <p>Zach: 5/31 to 6/2</p>
+        <?php echo $cal->showTrips();?>
     </div>
 
 </div>

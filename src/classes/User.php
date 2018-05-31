@@ -8,7 +8,7 @@ class User
     const OWNER = "O";
     const GUEST = "G";
 
-    const SESSION_NAME = 'user';
+    const SESSION_NAME = 'concord_user';
 
     private $id;
     private $email;

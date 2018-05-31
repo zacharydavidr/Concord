@@ -1,9 +1,15 @@
 <?php
 
+
 namespace Concord;
 
 use Concord\classes\Site;
 use Concord\classes\User;
+
+if(false) {
+    ini_set("display_errors", true);
+    error_reporting(E_ALL);
+}
 
 require __DIR__ . "/../vendor/autoload.php";
 
@@ -16,7 +22,6 @@ if(is_callable($localize)) {
 
 // Start the session system
 session_start();
-$user = null;
-if(isset($_SESSION[User::SESSION_NAME])) {
-    $user = $_SESSION[User::SESSION_NAME];
-}
+
+
+

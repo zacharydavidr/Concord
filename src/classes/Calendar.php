@@ -10,15 +10,17 @@ class Calendar
     private $year;
     private $weekdayLabels = array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
     private $selectedDate;
+    private $site;
 
     /**
      * Calendar constructor.
      */
-    public function __construct(){
+    public function __construct(Site $site){
         $this->month = date("n");
         $this->year = date("Y");
         $this->day = date("j");
         $this->selectedDate = date("Y-n-j");
+        $this->site = $site;
     }
 
     /**
@@ -185,6 +187,38 @@ HTML;
      */
     public function getNumDaysInMonth($month, $year){
         return cal_days_in_month ( CAL_GREGORIAN , $month , $year );
+    }
+
+    public function showTrips(){
+        $users = new Users($this->site);
+        $trip = new Trips($this->site);
+        $trips = $trip->getTripsByMonth($this->month, $this->year);
+
+        if(count($trips) == 0 ){
+            $html = <<<HTML
+<div>
+<p>There are no trips scheduled to start this month</p>
+</div>
+HTML;
+            return $html;
+        }
+
+        $html = "";
+        foreach ($trips as $event){
+            $startDate = $event['startDate'];
+            $endDate = $event['endDate'];
+            $guests = $event['guests'];
+            $user = $users->get($event['userid']);
+            $name = $user->getFirstName() . " " . $user->getLastName();
+
+            $html .= <<<HTML
+<div>
+<p>$name: $startDate to $endDate and bringing $guests </p>
+</div>
+HTML;
+        }
+
+        return $html;
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace Concord\controllers;
 
+use Concord\classes\Session;
 use Concord\classes\Site;
 use Concord\classes\Users;
 use Concord\classes\User;

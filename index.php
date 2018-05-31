@@ -40,6 +40,10 @@ function route(\Concord\classes\Site $site, array $urlInfo){
         case "trips":
             trips($site,$action, $param, $urlInfo);
             break;
+        case "logout":
+            unset($_SESSION[\Concord\classes\User::SESSION_NAME]);
+            echo "Logged Out";
+            break;
         default:
             require "web/page-not-found.php";
             break;
@@ -130,6 +134,12 @@ function account($site, $action, $param, $urlInfo){
  * @param $param
  */
 function calendar($site, $action, $param, $urlInfo){
+
+
+    if(!isset($_SESSION[\Concord\classes\User::SESSION_NAME])) {
+        header("location: /~rayzacha/Concord/unauthorized");
+    }
+
     require "web/calendar.php";
 
 }
@@ -141,6 +151,11 @@ function calendar($site, $action, $param, $urlInfo){
  * @param $param
  */
 function trips($site, $action, $param, $urlInfo){
+
+    if(!isset($_SESSION[\Concord\classes\User::SESSION_NAME])) {
+        header("location: /~rayzacha/Concord/unauthorized");
+    }
+
     if ($action == "create") {
 
         require "src/controllers/CreateTripController.php";

@@ -11,6 +11,7 @@ namespace Concord\controllers;
 
 use Concord\classes\Trips;
 use Concord\classes\Site;
+use DateTime;
 
 
 class CreateTripController
@@ -27,11 +28,11 @@ class CreateTripController
             $userId = trim($userId," \t\n\r\0\x0B");
         }
         if(isset($post['arrival_date'])) {
-            $startDate = strip_tags($post['start_date']);
+            $startDate = strip_tags($post['arrival_date']);
             $startDate = trim($startDate," \t\n\r\0\x0B");
         }
         if(isset($post['departure_date'])) {
-            $endDate = strip_tags($post['end_date']);
+            $endDate = strip_tags($post['departure_date']);
             $endDate = trim($endDate," \t\n\r\0\x0B");
         }
         if(isset($post['guests'])) {
@@ -39,11 +40,18 @@ class CreateTripController
             $guests = trim($guests," \t\n\r\0\x0B");
         }
 
+
         $trips = new Trips($site);
 
-        $startDate = date("Y-m-d H:i:s");
-        $endDate = date("Y-m-d H:i:s");
+        $startDate = new DateTime($startDate);
+        $startDate = $startDate->format('Y-m-d');
+
+
+        $endDate = new DateTime($endDate);
+        $endDate = $endDate->format('Y-m-d');
+
         $created = date("Y-m-d H:i:s");
+
         $trips->createTrip($userId, $guests, $startDate, $endDate, $created);
 
         $root = $site->getRoot();

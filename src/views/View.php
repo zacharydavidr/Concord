@@ -10,6 +10,7 @@ if(false) {
     echo "<pre>";
     echo "GET " . var_dump($_GET);
     echo "POST " . var_dump($_POST);
+    echo "SESSION" . var_dump($_SESSION);
     echo "</pre>";
 }
 
@@ -69,6 +70,9 @@ HTML;
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/~rayzacha/Concord/calendar/">Calendar<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/~rayzacha/Concord/trips/">Trips<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/~rayzacha/Concord/account/">Account<span class="sr-only">(current)</span></a>
